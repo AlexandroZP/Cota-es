@@ -2,7 +2,7 @@ import httpx
 
 
 class connectAPI:
-    def __init__(self, base_currency) :
+    def __init__(self, base_currency='USD'):
         self.isConnected = False       
         try:
             self.response = httpx.get(

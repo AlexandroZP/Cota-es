@@ -1,8 +1,3 @@
-from connect import connectAPI
+from tela import Tela 
 
-base_currency = 'USD'
-currency = 'EUR'
-con = connectAPI(base_currency)
-if con:
-    print(con.cotacao(currency))
-    print(con.moedas())
+tela = Tela()
