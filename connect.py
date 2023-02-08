@@ -1,28 +1,35 @@
 import httpx 
+from PySimpleGUI import PySimpleGUI as sg
 
 
 class connectAPI:
     def __init__(self, base_currency='USD'):
-        self.isConnected = False       
+        self._isConnected = False              
         try:
             self.response = httpx.get(
                 url=f'https://api.exchangerate.host/latest?base={base_currency}'
             ).json()
             self.currency_data = self.response['rates']
-            self.isConnected = True
+            self._isConnected = True
         except httpx.ConnectError:
-            self.isConnected = False 
+            self._isConnected = False 
     
-    def cotacao(self, currency):
-        if self.isConnected:
-            return self.currency_data.get(currency)
-        else:
-            return 'Não foi possivel executar a conversão'
+    @property
+    def _isConnected(self):
+        return self.isConnected
     
+    @_isConnected.setter
+    def _isConnected(self, value):
+        self.isConnected = value
+
     def moedas(self):
         moedas = []
-        if self.isConnected:
-            for moeda in self.currency_data:
-                moedas.append(moeda)
+        for moeda in self.currency_data:
+            moedas.append(moeda)
         return moedas
+    
+    def cotacao(self, currency):
+        return self.currency_data.get(currency)
+
+        
 
