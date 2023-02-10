@@ -11,10 +11,19 @@ class Tela():
              sg.Text('='), 
              sg.Input('0.00', size=(20,10), key='-TEXTO_MOSTRAGEM-', change_submits=True,  disabled=True),
              sg.Combo(values=(self.con.moedas()), default_value = 'BRL', size=(10,20), key='-CURRENCY-'), 
-             sg.Button('Converter', key='-CONVERT_BUTTON-')]
+             sg.Button('Converter', key='-CONVERT_BUTTON-')],
+             [sg.Button('Acompanhar cotacao')]
+        ]
+        self._salvos_frame = [
+            [sg.Table(values=[['USD','1.00',self.con.cotacao('BRL'),'BRL']],
+                      headings=['Moeda Base', 'Valor da moeda Base', 'Valor da moeda desejada', 'Moeda desejada']
+                      ,auto_size_columns=True, justification='center', num_rows=5,row_height=40, 
+                      select_mode='extended',key='-CURRENCY_LIST-')],
+            [sg.Button('Deletar')]
         ]
         self.__layout = [
             [sg.Frame('Selecione as moedas:', self._moedas_frame)],
+            [sg.Frame('Cotações salvas', self._salvos_frame)]
         ]
 
 
