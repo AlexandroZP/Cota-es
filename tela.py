@@ -33,18 +33,7 @@ class Tela():
         self.janela = sg.Window('Tela de Cadastro', self.__layout)
         
         
-        def deletar(self,selected):
-            lista = self.saved
-            list_2 = []
-            removeList = selected[:]
-            removeList.sort(reverse=True)
-            for index in removeList:
-                list_2.append(lista[index])
-                print(index)
-                lista.pop(index)
-            list_2.sort(reverse=True)
-            delete_row((list_2))
-            self.janela['-CURRENCY_LIST-'].update(values=lista)
+
 
         while True:
             events, values = self.janela.read()
@@ -68,4 +57,13 @@ class Tela():
                     self.janela['-CURRENCY_LIST-'].update(values=read_document())
 
                 case '-DELETE-':
-                    deletar(self, values['-CURRENCY_LIST-'])
+                    lista = read_document()
+                    list_2 = []
+                    removeList = values['-CURRENCY_LIST-']
+                    removeList.sort(reverse=True)
+                    for index in removeList:
+                        list_2.append(lista[index])
+                        lista.pop(index)
+                    list_2.sort(reverse=True)
+                    delete_row(list_2)
+                    self.janela['-CURRENCY_LIST-'].update(values=lista)

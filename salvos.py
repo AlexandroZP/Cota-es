@@ -39,13 +39,14 @@ def read_document():
 
 def delete_row(lista):
     document = read_document()
+    new_document = document[:]  
     with open('salvos.csv', 'w', newline='', encoding='utf-8') as arquivo:
         write = csv.writer(arquivo, delimiter=',')
+        document.sort(reverse=True)
         for linha in document:
-            for item in lista:
+            for item in lista:             
                 if linha[0] == item[0] and linha[3] == item[3]:
-                    document.remove(linha)
-
-        write.writerows(document)
+                    new_document.remove(linha)                 
+        write.writerows(new_document)
 
 
