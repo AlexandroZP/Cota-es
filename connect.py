@@ -22,6 +22,8 @@ class connectAPI:
     def _isConnected(self, value):
         self.isConnected = value
 
+
+
     def moedas(self):
         moedas = []
         for moeda in self.currency_data:
