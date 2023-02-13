@@ -36,12 +36,14 @@ class Tela():
         def deletar(self,selected):
             lista = self.saved
             list_2 = []
-            removeList = selected
+            removeList = selected[:]
             removeList.sort(reverse=True)
             for index in removeList:
                 list_2.append(lista[index])
+                print(index)
                 lista.pop(index)
-            delete_row(list_2)
+            list_2.sort(reverse=True)
+            delete_row((list_2))
             self.janela['-CURRENCY_LIST-'].update(values=lista)
 
         while True:
