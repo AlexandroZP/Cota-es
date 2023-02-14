@@ -2,6 +2,12 @@ import csv
 from connect import connectAPI
 
 
+
+def create_fiel():
+    with open('salvos.csv', 'w', newline='', encoding='utf-8') as arquivo:
+        writer = csv.DictWriter(arquivo, fieldnames='')
+
+
 def save_currency(currencyBase,valueBase,valueCurrency,currency):
     document = read_document()
     for linha in document:

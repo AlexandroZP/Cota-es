@@ -1,12 +1,15 @@
 from PySimpleGUI import PySimpleGUI as sg
 from connect import connectAPI
-from salvos import save_currency, read_document, update_csv, delete_row
+from salvos import save_currency, read_document, update_csv, delete_row,create_fiel
 
 class Tela():
     def __init__(self):
         sg.theme('TanBlue')
         self.con = connectAPI()
-        update_csv()
+        try:
+            update_csv()
+        except FileNotFoundError:
+            create_fiel()
         self.saved = read_document()
         self._moedas_frame =[
             [sg.Combo(values=(self.con.moedas()), default_value = 'USD', size=(10,20), key='-BASE_CURRENCY-'),
